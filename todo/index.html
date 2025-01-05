@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="top-nav">
+                <a href="../index.html" class="back-button">
+                    <i class="fas fa-chevron-left"></i>
+                    <span>Projects</span>
+                </a>
+                <div class="view-options">
+                    <button class="view-toggle active" data-view="list">
+                        <i class="fas fa-list"></i>
+                    </button>
+                    <button class="view-toggle" data-view="grid">
+                        <i class="fas fa-grip"></i>
+                    </button>
+                </div>
+            </nav>
+            <h1>Tasks</h1>
+        </header>
+
+        <form id="todo-form">
+            <div class="input-wrapper">
+                <input type="text" 
+                       id="todo-input" 
+                       placeholder="Add a new task..." 
+                       autocomplete="off">
+                <input type="datetime-local" 
+                       id="todo-date"
+                       aria-label="Task due date">
+                <button type="submit" class="submit-btn" aria-label="Add task">
+                    <span class="plus-icon"></span>
+                </button>
+            </div>
+        </form>
+
+        <div class="todo-list" id="todo-list"></div>
+
+        <div class="todo-stats">
+            <span id="tasks-left">0 tasks left</span>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+            <button id="clear-completed">Clear Completed</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

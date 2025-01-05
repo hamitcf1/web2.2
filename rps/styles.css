@@ -1,0 +1,177 @@
+/* RPS-specific variables */
+:root {
+    --choice-bg: var(--card-bg);
+    --win-color: var(--success-color);
+    --lose-color: var(--error-color);
+    --draw-color: var(--warning-color);
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 80px !important;
+}
+
+h1 {
+    font-size: 34px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.score-display {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.game-container {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.choice-btn {
+    background: var(--choice-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.choice-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.choice-btn:active {
+    transform: translateY(0);
+}
+
+.choice-icon {
+    font-size: 40px;
+}
+
+.choice-btn span {
+    color: var(--text-color);
+    font-size: 15px;
+}
+
+.game-result {
+    text-align: center;
+    margin-bottom: 32px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.game-result.active {
+    opacity: 1;
+}
+
+.result-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+
+.player-choice, .computer-choice {
+    text-align: center;
+}
+
+.vs {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--secondary-text);
+}
+
+.choice-display {
+    font-size: 60px;
+    margin-top: 16px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-message {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 24px;
+}
+
+.result-message.win {
+    color: var(--win-color);
+}
+
+.result-message.lose {
+    color: var(--lose-color);
+}
+
+.result-message.draw {
+    color: var(--draw-color);
+}
+
+.reset-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 24px;
+    color: var(--accent-color);
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+.reset-btn:hover {
+    background-color: var(--border-color);
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 16px;
+    }
+    
+    h1 {
+        font-size: 28px;
+    }
+    
+    .choices {
+        grid-template-columns: 1fr;
+    }
+    
+    .result-display {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .vs {
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.winning-choice {
+    animation: bounce 0.5s ease infinite;
+} 

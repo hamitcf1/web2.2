@@ -17,10 +17,11 @@ themeToggle.addEventListener('click', () => {
     localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark-theme' : '');
 });
 
-/*function updateThemeIcon() {
+/* function updateThemeIcon() {
     if (body.classList.contains('dark-theme')) {
         themeIcon.className = 'fas fa-sun';
     } else {
    //     themeIcon.className = 'fas fa-moon';
     }
 } 
+*/

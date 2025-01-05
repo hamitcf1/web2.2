@@ -21,6 +21,6 @@ function updateThemeIcon() {
     if (body.classList.contains('dark-theme')) {
         themeIcon.className = 'fas fa-sun';
     } else {
-        themeIcon.className = 'fas fa-moon';
+   //     themeIcon.className = 'fas fa-moon';
     }
 } 

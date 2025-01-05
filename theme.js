@@ -12,12 +12,12 @@ if (savedTheme) {
 
 themeToggle.addEventListener('click', () => {
     body.classList.toggle('dark-theme');
-    updateThemeIcon();
+   // updateThemeIcon();
     // Save theme preference
     localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark-theme' : '');
 });
 
-function updateThemeIcon() {
+/*function updateThemeIcon() {
     if (body.classList.contains('dark-theme')) {
         themeIcon.className = 'fas fa-sun';
     } else {

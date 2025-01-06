@@ -119,21 +119,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle click events on nav links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            console.log(`Navigation clicked: ${link.getAttribute('href')}`);
+            const href = link.getAttribute('href');
+            console.log(`Navigation clicked: ${href}`);
+            
+            // Eğer harici bir bağlantıysa (# ile başlamıyorsa)
+            if (!href.startsWith('#')) {
+                return; // Normal sayfa yönlendirmesine izin ver
+            }
+            
+            // Sayfa içi bağlantılar için
             e.preventDefault();
-            const targetId = link.getAttribute('href').slice(1);
+            const targetId = href.slice(1);
             const targetSection = document.getElementById(targetId);
             
-            updateActiveLink(targetId);
-            
-            targetSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            if (targetSection) {
+                updateActiveLink(targetId);
+                
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
 
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('active');
-                menuBtn.classList.remove('active');
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                    menuBtn.classList.remove('active');
+                }
             }
         });
     });

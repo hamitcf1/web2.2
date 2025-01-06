@@ -1,17 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#000000">
     <title>Portfolio | Junior Software Developer / Quality Assurance Engineer</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="theme-toggle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles/responsive.css">
-    <link rel="stylesheet" href="shared/nav-styles.css">
-    
 </head>
 <body>
     <div class="sidebar-overlay"></div>
@@ -39,25 +34,10 @@
                 <i class="fas fa-star"></i>
                 <span>Reviews</span>
             </a>
-            <button class="theme-toggle" id="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
-                <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
-                    <mask class="moon" id="moon-mask">
-                        <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                        <circle cx="24" cy="10" r="6" fill="black" />
-                    </mask>
-                    <circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor" />
-                    <g class="sun-beams" stroke="currentColor">
-                        <line x1="12" y1="1" x2="12" y2="3" />
-                        <line x1="12" y1="21" x2="12" y2="23" />
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                        <line x1="1" y1="12" x2="3" y2="12" />
-                        <line x1="21" y1="12" x2="23" y2="12" />
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                    </g>
-                </svg>
-            </button>
+            <a href="/web2.2/blog.html">
+                <i class="fa-solid fa-blog"></i>
+                  <span>Blog</span>
+            </a>
         </div>
     </nav>
 
@@ -68,9 +48,9 @@
 
         <section class="hero">
             <div class="hero-content animate fade-in-left">
-                <h1><em>Future</em> Junior Software Developer 
-                    <br> <em>Future</em> Quality Assurance Engineer</h1>
-                <p>I am a future Software Developer and Quality Assurance Engineer and I love what I do!</p>
+                <h1>Junior Software Developer 
+                    <br> Quality Assurance Engineer</h1>
+                <p>I am a Software Developer and Quality Assurance Engineer and I love what I do!</p>
             </div>
             <button class="cta-button animate fade-in-right" id="get-in-touch">Get in Touch</button>
         </section>
@@ -86,7 +66,8 @@
                         <h3>Web Calculator</h3>
                         <p>A sleek calculator app with basic arithmetic operations and keyboard support</p>
                         <div class="project-links">
-                            <a href="calculator/index.html" class="project-link">Live Demo</a>
+                            <span class="project-link disabled">Working On It</span>
+                            <!-- <a href="calculator/index.html" class="project-link">Live Demo</a> -->
                             <a href="https://github.com/hamitcf1/web2.2/tree/main/calculator" class="project-link">GitHub</a>
                         </div>
                     </div>
@@ -97,7 +78,8 @@
                         <h3>To-Do List</h3>
                         <p>A minimalist to-do list app with local storage and drag-and-drop functionality</p>
                         <div class="project-links">
-                            <a href="todo/index.html" class="project-link">Live Demo</a>
+                            <span class="project-link disabled">Working On It</span>
+                            <!-- <a href="todo/index.html" class="project-link">Live Demo</a> -->
                             <a href="https://github.com/hamitcf1/web2.2/tree/main/todo" class="project-link">GitHub</a>
                         </div>
                     </div>
@@ -108,7 +90,8 @@
                         <h3>Rock Paper Scissors</h3>
                         <p>Classic game with animated transitions and score tracking</p>
                         <div class="project-links">
-                            <a href="rps/index.html" class="project-link">Live Demo</a>
+                            <span class="project-link disabled">Working On It</span>
+                            <!-- <a href="rps/index.html" class="project-link">Live Demo</a> -->
                             <a href="https://github.com/hamitcf1/web2.2/tree/main/rps" class="project-link">GitHub</a>
                         </div>
                     </div>
@@ -323,8 +306,6 @@
         </footer>
     </main>
     <script src="script.js"></script>
-    <script src="theme-toggle.js"></script>
     <script src="projects.js"></script>
-    <script src="theme.js"></script>
 </body>
 </html> 

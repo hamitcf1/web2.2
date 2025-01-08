@@ -12,6 +12,7 @@ body {
   text-align: center;
   padding: 32px;
   color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .row {
@@ -39,6 +40,7 @@ body {
 .column img:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 /* Responsive layout - makes a two column-layout instead of four columns */
@@ -58,3 +60,23 @@ body {
     max-width: 100%;
   }
 }
+
+
+/* Grid Colors */
+/*
+#columnFirst {
+ background-color: white;
+}
+
+#columnSecond {
+ background-color: lightgray;
+}
+
+#columnThird {
+ background-color: gray;
+}
+
+#columnFourth {
+ background-color: darkgray;
+}
+*/

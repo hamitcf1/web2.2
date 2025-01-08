@@ -90,7 +90,7 @@ body {
     font-size: 0;
 }
 
-.sidebar.collapsed .nav-brand::first-letter {
+.sidebar.collapsed .nav-brand::first-letter{
     font-size: 1.2rem;
 }
 
@@ -449,7 +449,7 @@ body {
 .timeline-item:hover .timeline-content {
     transform: translateX(10px) scale(1.02);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgb(41, 41, 50);
 }
 
 /* Education styles */
@@ -463,7 +463,7 @@ body {
 }
 
 .education-content:hover {
-    transform: translateY(-5px) scale(1.01);
+    transform: translateX(10px) scale(1.01);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     background: rgba(255, 255, 255, 0.9);
 }
@@ -593,7 +593,9 @@ html {
 .project-card,
 .timeline-item,
 .education-content,
-.review-card {
+.review-card,
+.education-card:hover,
+.education-content{
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -1226,6 +1228,12 @@ h1, h2, h3, h4, h5, h6 {
 .education-card .gpa {
     color: var(--secondary-text);
     margin-bottom: 0.5rem;
+}
+
+.education-card:hover {
+    transform: translateY(-10px) scale(1.01);
+    box-shadow: 0 10px 20px rgba(31, 30, 107, 0.712);
+
 }
 
 /* Certificates section */

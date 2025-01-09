@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Blog | Junior Software Developer / Quality Assurance Engineer</title>
+    <link rel="stylesheet" href="shared-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar-overlay"></div>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="nav-brand">HamitCF</div>
+            <button class="sidebar-toggle" aria-label="Toggle sidebar">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+            <a href="/grid-gallery-design/index.html">
+              <i class="fa-solid fa-image"></i>
+                <span>Gallery</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="blog-container">
+        <header class="blog-header">
+            <a href="/index.html" class="back-to-portfolio">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <div class="blog-controls">
+                <div class="search-bar">
+                    <input type="text" id="blog-search" placeholder="Search posts...">
+                    <button type="button" id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button type="button" id="new-post-btn" class="primary-btn">
+                    <i class="fas fa-plus"></i> New Post
+                </button>
+            </div>
+        </header>
+
+        <!-- Blog Post Form Modal -->
+        <div id="post-form-modal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close">×</button>
+                <h2>Create New Blog Post</h2>
+                <form id="blog-post-form">
+                    <div class="form-group">
+                        <label for="post-title">Title</label>
+                        <input type="text" id="post-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-role">Role</label>
+                        <input type="text" id="post-role" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-content">Content</label>
+                        <textarea id="post-content" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="primary-btn">Publish Post</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Blog Posts Container -->
+        <section class="blog-posts">
+            <!-- Sample Blog Post Template -->
+            <article class="blog-post">
+                <h2 class="post-title">Welcome to My Blog</h2>
+                <div class="post-meta">
+                    <span class="post-date">January 1, 2024</span>
+                    <span class="post-author">HamitCF</span>
+                    <span class="post-role">Junior Software Developer</span>
+                </div>
+                <div class="post-content">
+                    <p class="post-preview">Welcome to my technical blog where I share my journey in software development and quality assurance...</p>
+                    <button class="read-more">Read More</button>
+                </div>
+            </article>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 HamitCF. All love reserved for Karina B &#10084;&#65039;.</p>
+            </div>
+
+            <div id="contact-modal" class="modal">
+              <div class="modal-content animate scale-up">
+                  <button class="modal-close">×</button>
+                  <h2>Get in Touch</h2>
+                  <div class="contact-links">
+                      <a href="https://github.com/hamitcf1" class="contact-link">
+                          <i class="fab fa-github"></i>
+                          GitHub
+                      </a>
+                      <a href="https://linkedin.com/in/hamitcf" class="contact-link">
+                          <i class="fab fa-linkedin"></i>
+                          LinkedIn
+                      </a>
+                      <a href="https://x.com/hamitcf" class="contact-link">
+                          <i class="fa-brands fa-x-twitter"></i>
+                          X
+                      </a>
+                      <a href="mailto:hamitfindik2@gmail.com" class="contact-link">
+                          <i class="fas fa-envelope"></i>
+                          hamitfindik2@gmail.com
+                      </a>
+                  </div>
+              </div>
+          </div>
+        </footer>
+    </main>
+
+    <script src="blog.js"></script>
+</body>
+</html> 

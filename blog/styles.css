@@ -60,7 +60,9 @@ body {
 .back-to-portfolio:hover {
     color: var(--accent);
     opacity: 1;
-    transform: translateX(-5px);
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;
+
 }
 
 /* Blog Controls */
@@ -68,6 +70,23 @@ body {
     display: flex;
     gap: 1rem;
     align-items: center;
+}
+
+.blog-link {
+    background-color:#0066cc77;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    color: var(--text);
+    transition: all 0.3s ease;
+    background: var(--card-bg);
+    color: var(--accent);
+}
+
+.blog-link:active {
+    background-color: #0066cc8c;
+    color: var(--text);
+    background: var(--card-bg);
+    color: var(--accent);
 }
 
 .search-bar {
@@ -106,7 +125,8 @@ body {
 }
 
 .primary-btn:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
 }
 
@@ -127,7 +147,8 @@ body {
 }
 
 .blog-post:hover {
-    transform: translateY(-5px) scale(1.02);
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -289,28 +310,11 @@ body {
     padding: 2rem 1rem;
 }
 
-.sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    z-index: 999;
-    display: none;
-}
-
-.sidebar-overlay.active {
-    display: block;
-}
-
-/* Sidebar Header Styles */
 .sidebar-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: 0.1rem;
 }
 
 .nav-brand {
@@ -319,15 +323,83 @@ body {
     font-size: 1.2rem;
     text-decoration: none;
     transition: all 0.3s ease;
-    padding: 0.8rem 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 0.8rem;
 }
 
 .nav-brand:hover {
-    background: rgba(0, 122, 255, 0.1);
+    background: var(--card-bg);
     color: var(--accent);
 }
 
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 0.8rem;
+    transition: all 0.3s ease;
+    color: var(--text);
+    opacity: 0.7;
+}
+
+/*
+.nav-links a:hover {
+    background: var(--card-bg);
+    opacity: 1;
+}
+
+.nav-links a.active {
+    background: var(--card-bg);
+    color: var(--accent);
+    opacity: 1;
+}
+
+.nav-links a i {
+    min-width: 20px;
+    text-align: center;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+*/
+
+.nav-links a i {
+    min-width: 24px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* Clean up redundant styles */
+.navbar,
+.nav-brand,
+.nav-links a {
+    /* Keep existing styles but update for sidebar context */
+    color: var(--nav-text);
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    border-radius: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--accent);
+}
+
+
+/* Sidebar toggle button */
 .sidebar-toggle {
     background: none;
     border: none;
@@ -346,62 +418,38 @@ body {
     color: var(--accent);
 }
 
-/* Rotate icon when sidebar is collapsed */
-.sidebar.collapsed .sidebar-toggle i {
-    transform: rotate(180deg);
-}
 
-/* Navigation Links */
-.nav-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 2rem;
-}
-
-.nav-links a {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    color: var(--text);
-    text-decoration: none;
-    padding: 0.8rem 1rem;
-    border-radius: 0.8rem;
+/* Sub-links styles */
+.sub-linkss {
+    /*margin-left: 1.5rem;*/
+    border-left: 1px solid var(--border-color);
+    padding-left: 0.5rem;
+    margin-bottom: 0.5rem;
+        scale: 0.8;
     transition: all 0.3s ease;
-    opacity: 0.7;
 }
 
-.nav-links a i {
-    font-size: 1.2rem;
-    min-width: 24px;
-    text-align: center;
+
+.nav-links > a:first-child:hover + .sub-links,
+.sub-links:hover {
+    display: block;
 }
 
-.nav-links a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    opacity: 1;
-    transform: translateX(5px);
+.sub-links a {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
 }
 
-.nav-links a.active {
-    background: rgba(0, 122, 255, 0.1);
+.sub-links a:hover {
+    background: var(--card-bg);
+}
+
+.sub-links a.active {
+    background: var(--card-bg);
     color: var(--accent);
-    opacity: 1;
 }
 
-/* Collapsed state adjustments */
-.sidebar.collapsed .nav-links a span {
-    display: none;
-}
-
-.sidebar.collapsed .nav-brand {
-    font-size: 0;
-}
-
-.sidebar.collapsed .nav-brand::first-letter {
-    font-size: 1.2rem;
-}
-
+/* Collapsed state styles */
 .sidebar.collapsed .nav-links {
     align-items: center;
 }
@@ -415,6 +463,50 @@ body {
 
 .sidebar.collapsed .nav-links a i {
     margin: 0;
+    font-size: 1.1rem;
+}
+
+.sidebar.collapsed .nav-brand {
+    font-size: 0;
+}
+
+.sidebar.collapsed .nav-brand::first-letter {
+    font-size: 1.2rem;
+}
+
+.sidebar.collapsed .nav-links a span {
+    display: none;
+}
+
+.sidebar.collapsed .sub-links {
+    margin-left: 0;
+}
+
+.sidebar.collapsed .sub-links a {
+    width: 40px;
+    height: 40px;
+    padding: 0.8rem;
+    justify-content: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+        width: 250px;
+    }
+
+    .sub-links {
+        margin-left: 2rem;
+    }
+
+    .blog-container {
+        margin-left: 0;
+    }
 }
 
 /* Search Button Styles */
@@ -556,4 +648,49 @@ body {
     max-width: var(--container-width);
     margin: 0 auto;
     color: var(--text);
+}
+
+/* Sub-links styles */
+.sub-links {
+    margin-left: 1rem;
+    border-left: 1px solid var(--border-color);
+    padding-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: none;
+}
+
+/*
+.nav-links > a:first-child:hover + .sub-links,
+.sub-links:hover {
+    display: block;
+}
+
+.sub-links a {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
+}
+
+.sub-links a i {
+    font-size: 0.9rem;
+}
+
+/* Adjust collapsed state for sub-links */
+/*
+.sidebar.collapsed .sub-links {
+    margin-left: 0;
+    border-left: none;
+    padding-left: 0;
+}
+
+.sidebar.collapsed .sub-links a {
+    width: 40px;
+    height: 40px;
+    padding: 0.8rem;
+}
+
+/* Mobile adjustments for sub-links */
+@media (max-width: 768px) {
+    .sub-links {
+        margin-left: 1.5rem;
+    }
 } 

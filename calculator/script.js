@@ -1,112 +1,91 @@
+function addClickAnimation(button) {
+    button.classList.add('clicked');
+    
+    // Add active state color
+    if (button.classList.contains('operator')) {
+        button.style.backgroundColor = '#ffc168';
+    } else if (button.classList.contains('special')) {
+        button.style.backgroundColor = '#d4d4d4';
+    } else {
+        button.style.backgroundColor = '#737373';
+    }
+    
+    setTimeout(() => {
+        button.classList.remove('clicked');
+        // Reset to original color with transition
+        button.style.backgroundColor = '';
+    }, 200);
+}
+
 class Calculator {
     constructor() {
+        this.previousOperand = '';
+        this.currentOperand = '0';
+        this.operation = undefined;
+        this.shouldResetScreen = false;
+    }
+
+    clear() {
         this.currentOperand = '0';
         this.previousOperand = '';
         this.operation = undefined;
-        this.shouldResetScreen = false;
-        
-        this.init();
     }
 
-    init() {
-        this.currentOperandDisplay = document.getElementById('current-operand');
-        this.previousOperandDisplay = document.getElementById('previous-operand');
-        
-        // Add event listeners for keyboard input
-        document.addEventListener('keydown', (e) => {
-            if (e.key >= '0' && e.key <= '9' || e.key === '.') {
-                this.appendNumber(e.key);
-                this.animateKey(`[data-number="${e.key}"]`);
-            }
-            if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
-                const operatorMap = { '/': '÷', '*': '×' };
-                const operator = operatorMap[e.key] || e.key;
-                this.setOperation(operator);
-                this.animateKey(`[data-operator="${operator}"]`);
-            }
-            if (e.key === 'Enter' || e.key === '=') {
-                this.calculate();
-                this.animateKey('[data-operator="="]');
-            }
-            if (e.key === 'Escape') {
-                this.clear();
-                this.animateKey('[data-action="clear"]');
-            }
-            if (e.key === 'Backspace') {
-                this.delete();
-            }
-        });
+    delete() {
+        if (this.currentOperand.length === 1) {
+            this.currentOperand = '0';
+        } else {
+            this.currentOperand = this.currentOperand.slice(0, -1);
+        }
+    }
 
-        // Add event listeners for button clicks
-        document.querySelectorAll('.key').forEach(key => {
-            key.addEventListener('click', () => {
-                if (key.dataset.number !== undefined) {
-                    this.appendNumber(key.dataset.number);
-                } else if (key.dataset.operator !== undefined) {
-                    if (key.dataset.operator === '=') {
-                        this.calculate();
-                    } else {
-                        this.setOperation(key.dataset.operator);
-                    }
-                } else if (key.dataset.action !== undefined) {
-                    switch (key.dataset.action) {
-                        case 'clear':
-                            this.clear();
-                            break;
-                        case 'toggle-sign':
-                            this.toggleSign();
-                            break;
-                        case 'percentage':
-                            this.percentage();
-                            break;
-                    }
-                }
+    toggleSign() {
+        if (this.currentOperand === '0') return;
+        this.currentOperand = this.currentOperand.charAt(0) === '-' ? 
+            this.currentOperand.slice(1) : '-' + this.currentOperand;
+    }
 
-                // Add haptic feedback
-                if (window.navigator.vibrate) {
-                    window.navigator.vibrate(50);
-                }
-            });
-        });
+    percentage() {
+        const current = parseFloat(this.currentOperand);
+        if (isNaN(current)) return;
+        this.currentOperand = (current / 100).toString();
     }
 
     appendNumber(number) {
         if (this.shouldResetScreen) {
-            this.currentOperand = '';
+            this.currentOperand = number.toString();
             this.shouldResetScreen = false;
+            return;
         }
-        
         if (number === '.' && this.currentOperand.includes('.')) return;
         if (this.currentOperand === '0' && number !== '.') {
-            this.currentOperand = number;
+            this.currentOperand = number.toString();
         } else {
-            this.currentOperand += number;
+            this.currentOperand = this.currentOperand.toString() + number.toString();
         }
-        this.updateDisplay();
     }
 
-    setOperation(operator) {
-        if (this.operation !== undefined) {
-            this.calculate();
+    chooseOperation(operation) {
+        if (this.currentOperand === '') return;
+        if (this.previousOperand !== '') {
+            this.compute();
         }
-        this.operation = operator;
+        this.operation = operation;
         this.previousOperand = this.currentOperand;
-        this.shouldResetScreen = true;
-        this.updateDisplay();
+        this.currentOperand = '';
     }
 
-    calculate() {
+    compute() {
         let computation;
         const prev = parseFloat(this.previousOperand);
         const current = parseFloat(this.currentOperand);
-        
         if (isNaN(prev) || isNaN(current)) return;
-        
+
         switch (this.operation) {
             case '+':
                 computation = prev + current;
                 break;
-            case '-':
+            case '−':
                 computation = prev - current;
                 break;
             case '×':
@@ -117,7 +96,7 @@ class Calculator {
                     this.currentOperand = 'Error';
                     this.operation = undefined;
                     this.previousOperand = '';
-                    this.updateDisplay();
+                    this.shouldResetScreen = true;
                     return;
                 }
                 computation = prev / current;
@@ -125,57 +104,20 @@ class Calculator {
             default:
                 return;
         }
-        
+
         this.currentOperand = computation.toString();
         this.operation = undefined;
         this.previousOperand = '';
-        this.updateDisplay();
+        this.shouldResetScreen = true;
     }
 
-    clear() {
-        this.currentOperand = '0';
-        this.previousOperand = '';
-        this.operation = undefined;
-        this.updateDisplay();
-    }
-
-    delete() {
-        if (this.currentOperand.length === 1) {
-            this.currentOperand = '0';
-        } else {
-            this.currentOperand = this.currentOperand.slice(0, -1);
-        }
-        this.updateDisplay();
-    }
-
-    toggleSign() {
-        this.currentOperand = (parseFloat(this.currentOperand) * -1).toString();
-        this.updateDisplay();
-    }
-
-    percentage() {
-        this.currentOperand = (parseFloat(this.currentOperand) / 100).toString();
-        this.updateDisplay();
-    }
-
-    updateDisplay() {
-        this.currentOperandDisplay.textContent = this.formatNumber(this.currentOperand);
-        if (this.operation) {
-            this.previousOperandDisplay.textContent = 
-                `${this.formatNumber(this.previousOperand)} ${this.operation}`;
-        } else {
-            this.previousOperandDisplay.textContent = '';
-        }
-    }
-
-    formatNumber(number) {
+    getDisplayNumber(number) {
         if (number === 'Error') return number;
-        
         const stringNumber = number.toString();
         const integerDigits = parseFloat(stringNumber.split('.')[0]);
         const decimalDigits = stringNumber.split('.')[1];
-        
         let integerDisplay;
+        
         if (isNaN(integerDigits)) {
             integerDisplay = '';
         } else {
@@ -191,13 +133,103 @@ class Calculator {
         }
     }
 
-    animateKey(selector) {
-        const key = document.querySelector(selector);
-        if (key) {
-            key.classList.add('pressed');
-            setTimeout(() => key.classList.remove('pressed'), 100);
+    updateDisplay() {
+        const currentOperandElement = document.querySelector('.current-operand');
+        const displayText = this.getDisplayNumber(this.currentOperand);
+        
+        // Reset classes
+        currentOperandElement.classList.remove('long', 'very-long');
+        
+        // Calculate the appropriate class based on content length
+        const textLength = displayText.length;
+        const fontSize = window.getComputedStyle(currentOperandElement).fontSize;
+        const containerWidth = currentOperandElement.offsetWidth;
+        
+        // Create a temporary span to measure text width
+        const span = document.createElement('span');
+        span.style.fontSize = fontSize;
+        span.style.visibility = 'hidden';
+        span.style.position = 'absolute';
+        span.textContent = displayText;
+        document.body.appendChild(span);
+        
+        const textWidth = span.offsetWidth;
+        document.body.removeChild(span);
+        
+        // Add appropriate class based on text width
+        if (textWidth > containerWidth * 0.8) {
+            currentOperandElement.classList.add('long');
+        }
+        if (textWidth > containerWidth * 0.9) {
+            currentOperandElement.classList.add('very-long');
+        }
+        
+        currentOperandElement.textContent = displayText;
+
+        // Update previous operand
+        if (this.operation != null) {
+            document.querySelector('.previous-operand').textContent =
+                `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`;
+        } else {
+            document.querySelector('.previous-operand').textContent = '';
         }
     }
 }
 
-const calculator = new Calculator(); 
+const calculator = new Calculator();
+
+document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', () => {
+        addClickAnimation(button);
+        
+        if (button.textContent === 'AC') {
+            calculator.clear();
+        } else if (button.textContent === '±') {
+            calculator.toggleSign();
+        } else if (button.textContent === '%') {
+            calculator.percentage();
+        } else if ('+-−×÷'.includes(button.textContent)) {
+            calculator.chooseOperation(button.textContent);
+        } else if (button.textContent === '=') {
+            calculator.compute();
+        } else {
+            calculator.appendNumber(button.textContent);
+        }
+        calculator.updateDisplay();
+    });
+});
+
+// Keyboard support
+document.addEventListener('keydown', e => {
+    const key = e.key;
+    let button = null;
+
+    // Find the corresponding button for the pressed key
+    if (key >= '0' && key <= '9' || key === '.') {
+        button = Array.from(document.querySelectorAll('button')).find(b => b.textContent === key);
+    } else if (key === 'Enter' || key === '=') {
+        button = document.querySelector('button.operator:last-child');
+    } else if (key === 'Escape') {
+        button = document.querySelector('button.special');
+    } else if (['+', '-', '*', '/', '%'].includes(key)) {
+        const opMap = { '*': '×', '/': '÷', '-': '−' };
+        button = Array.from(document.querySelectorAll('button')).find(b => b.textContent === (opMap[key] || key));
+    }
+
+    // Add animation if button was found
+    if (button) {
+        addClickAnimation(button);
+    }
+
+    // Original keyboard handling logic
+    if (key >= '0' && key <= '9' || key === '.') calculator.appendNumber(key);
+    if (key === '=' || key === 'Enter') calculator.compute();
+    if (key === 'Backspace') calculator.delete();
+    if (key === 'Escape') calculator.clear();
+    if (key === '%') calculator.percentage();
+    if (['+', '-', '*', '/'].includes(key)) {
+        const opMap = { '*': '×', '/': '÷', '-': '−' };
+        calculator.chooseOperation(opMap[key] || key);
+    }
+    calculator.updateDisplay();
+}); 

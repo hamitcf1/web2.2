@@ -1,417 +1,301 @@
 :root {
-    /* Light theme */
-    --bg-color: #f2f2f7;
-    --card-bg: #ffffff;
-    --text-color: #000000;
-    --secondary-text: #6c6c6c;
-    --border-color: #e0e0e0;
-    --accent-color: #007AFF;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --delete-color: var(--error-color);
-    --complete-color: var(--success-color);
-    --calendar-icon-filter: invert(0.5);
+    --primary-color: #007AFF;
+    --background: #f5f5f7;
+    --text: #1d1d1f;
+    --completed: #86868b;
+    --border: #d2d2d7;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --toast-success: #34C759;
+    --toast-warning: #FF3B30;
+    --toast-info: #007AFF;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #000000;
-        --card-bg: #1c1c1e;
-        --text-color: #ffffff;
-        --secondary-text: #98989f;
-        --border-color: #38383a;
-        --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        --calendar-icon-filter: invert(0.7);
-    }
+[data-theme="dark"] {
+    --background: #000000;
+    --text: #ffffff;
+    --completed: #666666;
+    --border: #333333;
+    --card-bg: rgba(28, 28, 30, 0.8);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', sans-serif;
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: var(--background);
+    color: var(--text);
     min-height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: var(--text-color);
-}
-
-/* Nav Styles */
-.top-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px;
-    background-color: var(--bg-color);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    z-index: 100;
+    justify-content: center;
+    padding: 2rem;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--accent-color);
-    text-decoration: none;
-    font-size: 17px;
-    font-weight: 400;
-    padding: 8px;
-    margin: -8px;
-    border-radius: 8px;
-    transition: background-color 0.2s;
-}
-
-.back-button:hover {
-    background-color: rgba(0, 122, 255, 0.1);
-}
-
-.back-button i {
-    font-size: 14px;
-}
-
-/* Todo App Styles */
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    padding-top: 80px !important;
-}
-
-header {
-    margin-bottom: 32px;
-}
-
-.view-options {
-    display: flex;
-    gap: 8px;
-}
-
-.view-toggle {
-    background: none;
-    border: none;
-    color: var(--secondary-text);
-    font-size: 16px;
-    padding: 8px;
-    cursor: pointer;
-    border-radius: 6px;
-}
-
-.view-toggle.active {
-    color: var(--accent-color);
     background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 18px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+    margin: 4rem auto;
 }
 
 h1 {
-    font-size: 34px;
-    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 2.5rem;
 }
 
-.input-wrapper {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 12px 16px;
+#todo-form {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow);
-    position: relative;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-.input-wrapper i {
-    color: var(--accent-color);
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.input-wrapper.submitting i {
-    transform: rotate(90deg);
+.input-group {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
 }
 
 #todo-input {
-    border: none;
-    background: none;
-    font-size: 17px;
-    color: var(--text-color);
     flex: 1;
-    outline: none;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 1rem;
+    background: var(--card-bg);
+    color: var(--text);
+    font-size: 1rem;
 }
 
 #todo-date {
+    padding: 0.8rem;
     border: none;
-    background: none;
-    color: var(--secondary-text);
-    font-size: 15px;
-    outline: none;
+    border-radius: 1rem;
+    background: var(--card-bg);
+    color: var(--text);
     cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 6px;
-    min-width: 140px;
 }
 
-#todo-date::-webkit-calendar-picker-indicator {
-    filter: var(--calendar-icon-filter);
+#todo-form button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-#todo-input::placeholder {
-    color: var(--secondary-text);
+#todo-form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
 }
 
 .todo-item {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 16px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: var(--card-bg);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
     animation: slideIn 0.3s ease;
-    box-shadow: var(--shadow);
-    position: relative;
 }
 
-.todo-checkbox {
-    width: 24px;
-    height: 24px;
+.todo-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.todo-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.todo-item input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
     border-radius: 50%;
-    border: 2px solid var(--border-color);
     cursor: pointer;
-    flex-shrink: 0;
-    position: relative;
-}
-
-.todo-checkbox.checked {
-    background: var(--success-color);
-    border-color: var(--success-color);
-}
-
-.todo-checkbox.checked::after {
-    content: '✓';
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 14px;
+    accent-color: var(--primary-color);
 }
 
 .todo-text {
     flex: 1;
-    font-size: 17px;
-    margin-bottom: 4px;
+    transition: color 0.3s ease;
 }
 
-.completed .todo-text {
+.todo-item.completed .todo-text {
     text-decoration: line-through;
+    color: var(--completed);
+}
+
+.todo-date {
+    font-size: 0.8rem;
     color: var(--secondary-text);
+    background: rgba(0, 122, 255, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 1rem;
 }
 
 .delete-btn {
-    opacity: 0;
-    color: var(--delete-color);
     background: none;
     border: none;
+    color: var(--secondary-text);
     cursor: pointer;
-    font-size: 16px;
-    padding: 4px 8px;
-    transition: opacity 0.2s;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
 }
 
-.todo-item:hover .delete-btn {
-    opacity: 1;
+.delete-btn:hover {
+    color: var(--toast-warning);
+    background: rgba(255, 59, 48, 0.1);
 }
 
-.todo-stats {
+.todo-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--secondary-text);
-    font-size: 15px;
-    margin-top: 24px;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--card-bg);
 }
 
 .filters {
     display: flex;
-    gap: 16px;
+    gap: 0.5rem;
 }
 
 .filter-btn {
     background: none;
     border: none;
-    color: var(--secondary-text);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
     cursor: pointer;
-    font-size: 15px;
-    padding: 4px 8px;
+    color: var(--secondary-text);
+    transition: all 0.3s ease;
 }
 
+.filter-btn:hover,
 .filter-btn.active {
-    color: var(--accent-color);
-    font-weight: 600;
+    background: var(--card-bg);
+    color: var(--primary-color);
 }
 
-#clear-completed {
+.clear-btn {
     background: none;
     border: none;
-    color: var(--delete-color);
+    color: var(--toast-warning);
     cursor: pointer;
-    font-size: 15px;
+    padding: 0.8rem 1.5rem;
+    border-radius: 2rem;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.clear-btn:hover {
+    background: rgba(255, 59, 48, 0.1);
+}
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--card-bg);
+    color: var(--text);
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.toast-success {
+    border-left: 4px solid var(--toast-success);
+}
+
+.toast-warning {
+    border-left: 4px solid var(--toast-warning);
+}
+
+.toast-info {
+    border-left: 4px solid var(--toast-info);
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .todo-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .filters {
+        justify-content: center;
+    }
 }
 
 @keyframes slideIn {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateX(-20px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
 }
 
-@media (max-width: 480px) {
-    .container {
-        padding: 16px;
-    }
-    
-    h1 {
-        font-size: 28px;
-    }
-    
-    .todo-stats {
-        flex-direction: column;
-        gap: 16px;
-        align-items: center;
+@keyframes completeTask {
+    50% {
+        background: var(--win-color);
+        transform: scale(1.02);
     }
 }
 
-.add-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--accent-color);
-    color: white;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 16px;
+.empty-state {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.add-btn:active {
-    transform: translateY(-50%) scale(0.95);
-}
-
-.todo-content {
-    flex: 1;
-}
-
-.todo-date {
-    font-size: 13px;
+    padding: 3rem;
     color: var(--secondary-text);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
 }
 
-/* Grid view styles */
-.todo-list.grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px;
-}
-
-.todo-list.grid-view .todo-item {
-    margin-bottom: 0;
-}
-
-/* Submit button and plus icon styles */
-.submit-btn {
-    background: var(--accent-color);
-    color: white;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-    position: relative;
-}
-
-.plus-icon {
-    position: relative;
-    width: 14px;
-    height: 14px;
-}
-
-.plus-icon::before,
-.plus-icon::after {
-    content: '';
-    position: absolute;
-    background: white;
-    border-radius: 1px;
-    transition: transform 0.3s ease;
-}
-
-.plus-icon::before {
-    width: 14px;
-    height: 2px;
-    top: 6px;
-    left: 0;
-}
-
-.plus-icon::after {
-    width: 2px;
-    height: 14px;
-    left: 6px;
-    top: 0;
-}
-
-.input-wrapper.submitting .plus-icon::before {
-    transform: rotate(180deg);
-}
-
-.input-wrapper.submitting .plus-icon::after {
-    transform: rotate(90deg);
-}
-
-.submit-btn:hover {
-    transform: scale(1.1);
-}
-
-.submit-btn:active {
-    transform: scale(0.9);
-}
-
-/* Update input wrapper for better positioning */
-.input-wrapper {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow);
-    position: relative;
-}
-
-#todo-input {
-    border: none;
-    background: none;
-    font-size: 17px;
-    color: var(--text-color);
-    width: calc(100% - 44px);
-    outline: none;
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.7;
 } 

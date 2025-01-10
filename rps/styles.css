@@ -1,177 +1,304 @@
-/* RPS-specific variables */
 :root {
-    --choice-bg: var(--card-bg);
-    --win-color: var(--success-color);
-    --lose-color: var(--error-color);
-    --draw-color: var(--warning-color);
+    --win-color: #34C759;
+    --lose-color: #FF3B30;
+    --draw-color: #FF9500;
 }
 
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    padding-top: 80px !important;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 4rem auto;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 34px;
-    font-weight: 700;
     text-align: center;
-    margin-bottom: 24px;
-}
-
-.score-display {
-    font-size: 17px;
+    margin-bottom: 2rem;
+    color: var(--text);
     font-weight: 600;
-    color: var(--accent-color);
+    font-size: 2.5rem;
 }
 
-.game-container {
+/* Score board styling */
+.score-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.score {
     background: var(--card-bg);
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.score:hover {
+    transform: translateY(-5px);
+}
+
+.score p {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.score span {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* Game area styling */
+.game-area {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.result {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    min-height: 2em;
+    color: var(--text);
 }
 
 .choices {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
-.choice-btn {
-    background: var(--choice-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 16px;
+.choice {
+    background: var(--card-bg);
+    border: none;
+    padding: 2rem;
+    border-radius: 16px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 1rem;
 }
 
-.choice-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
-.choice-btn:active {
-    transform: translateY(0);
+.choice:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .choice-icon {
-    font-size: 40px;
+    font-size: 3rem;
 }
 
-.choice-btn span {
-    color: var(--text-color);
-    font-size: 15px;
+.choice-label {
+    font-size: 1rem;
+    color: var(--text);
 }
 
-.game-result {
-    text-align: center;
-    margin-bottom: 32px;
+/* Controls styling */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.control-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+}
+
+.control-btn i {
+    font-size: 1rem;
+}
+
+/* History section styling */
+.history-section {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.history-section h2 {
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    animation: slideIn 0.3s ease;
+}
+
+.history-item .result-win {
+    color: var(--win-color);
+    font-weight: 600;
+}
+
+.history-item .result-lose {
+    color: var(--lose-color);
+    font-weight: 600;
+}
+
+.history-item .result-tie {
+    color: var(--draw-color);
+    font-weight: 600;
+}
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--card-bg);
+    color: var(--text);
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: all 0.3s ease;
 }
 
-.game-result.active {
+.toast.show {
+    transform: translateX(-50%) translateY(0);
     opacity: 1;
 }
 
-.result-display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
-    margin-bottom: 24px;
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.player-choice, .computer-choice {
-    text-align: center;
-}
-
-.vs {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--secondary-text);
-}
-
-.choice-display {
-    font-size: 60px;
-    margin-top: 16px;
-    min-height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.result-message {
-    font-size: 24px;
-    font-weight: 600;
-    margin-top: 24px;
-}
-
-.result-message.win {
-    color: var(--win-color);
-}
-
-.result-message.lose {
-    color: var(--lose-color);
-}
-
-.result-message.draw {
-    color: var(--draw-color);
-}
-
-.reset-btn {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 12px 24px;
-    color: var(--accent-color);
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.2s;
-}
-
-.reset-btn:hover {
-    background-color: var(--border-color);
-}
-
-@media (max-width: 480px) {
+/* Mobile responsiveness */
+@media (max-width: 768px) {
     .container {
-        padding: 16px;
+        margin: 1rem;
+        padding: 1rem;
     }
-    
-    h1 {
-        font-size: 28px;
-    }
-    
-    .choices {
+
+    .score-board {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
-    
-    .result-display {
+
+    .choices {
         flex-direction: column;
-        gap: 16px;
+        align-items: center;
     }
-    
-    .vs {
-        transform: rotate(90deg);
+
+    .choice {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .control-btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+/* Add choice selection animation */
+.choice.selected {
+    animation: selectChoice 0.5s ease;
 }
 
-.winning-choice {
-    animation: bounce 0.5s ease infinite;
+@keyframes selectChoice {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(0, 122, 255, 0.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Improve control buttons spacing and clarity */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.control-btn {
+    min-width: 150px;
+    justify-content: center;
+}
+
+/* Enhance history items */
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    animation: slideIn 0.3s ease;
+}
+
+.result-win {
+    color: var(--win-color);
+    font-weight: 600;
+}
+
+.result-lose {
+    color: var(--lose-color);
+    font-weight: 600;
+}
+
+.result-tie {
+    color: var(--draw-color);
+    font-weight: 600;
 } 

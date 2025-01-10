@@ -164,12 +164,13 @@ body {
     text-decoration: none;
     padding: 0.8rem 1rem;
     border-radius: 0.8rem;
-    transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
     background: rgba(255, 255, 255, 0.1);
     color: var(--accent);
+    transform: translateY(-3px) scale(1.05);
+    transition: all 0.3s ease;
 }
 
 .hero {
@@ -243,9 +244,10 @@ body {
 }
 
 .project-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;
     background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 20px rgba(31, 30, 107, 0.712);
 }
 
 .project-image {
@@ -280,8 +282,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2.5rem;
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;    font-size: 2.5rem;
     color: var(--text);
     opacity: 0.5;
 }
@@ -289,6 +291,7 @@ body {
 /* Hover effect only when image exists */
 .project-card:hover .project-image img:not(.error) {
     transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(31, 30, 107, 0.712);
 }
 
 /* Placeholder for upcoming projects */
@@ -331,7 +334,9 @@ body {
 .project-link:hover {
     background: var(--accent);
     color: white;
-    transform: scale(1.05);
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 20px rgba(31, 30, 107, 0.712);
 }
 
 .calculator-img {
@@ -367,6 +372,10 @@ body {
 
     .nav-links {
         gap: 1rem;
+    }
+
+    .sidebar.collapsed .nav-brand {
+        display: none;
     }
 }
 
@@ -447,9 +456,10 @@ body {
 }
 
 .timeline-item:hover .timeline-content {
-    transform: translateX(10px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;
     background: rgb(41, 41, 50);
+    box-shadow: 0 10px 20px rgba(31, 30, 107, 0.712);
 }
 
 /* Education styles */
@@ -463,7 +473,8 @@ body {
 }
 
 .education-content:hover {
-    transform: translateX(10px) scale(1.01);
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     background: rgba(255, 255, 255, 0.9);
 }
@@ -510,6 +521,7 @@ body {
 .courses li:hover {
     transform: translateX(5px);
     background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 20px rgba(31, 30, 107, 0.712);
 }
 
 .dark-theme .courses li {
@@ -532,14 +544,14 @@ body {
     backdrop-filter: blur(20px);
     padding: 2rem;
     border-radius: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
 .review-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;
     background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 20px rgba(31, 30, 107, 0.712);
 }
 
 .review-text {
@@ -748,7 +760,8 @@ html {
 
 .courses li {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;
 }
 
 .courses li.animate {
@@ -934,7 +947,7 @@ html {
 }
 
 /* Add these styles for the disabled project links */
-.project-link.disabled {
+.project-link-disabled {
     background: rgba(128, 128, 128, 0.2);
     color: var(--secondary-text);
     cursor: not-allowed;
@@ -942,6 +955,29 @@ html {
     flex: 1;
     text-align: center;
     white-space: nowrap;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    opacity: 0.5;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+
+}
+
+.project-link-disabled:hover {
+    background: rgba(128, 128, 128, 0.2);
+    color: var(--secondary-text);
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.3s ease;
+    background: var(--accent);
+    color: white;
 }
 
 /* Fix project links alignment */
@@ -1263,6 +1299,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .cert-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(31, 30, 107, 0.712);
 }
 
 .cert-card i {
@@ -1296,7 +1333,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Make HamitCF text a button */
-.nav-brand {
+/*.nav-brand {
     cursor: pointer;
     padding: 0.8rem 1rem;
     border-radius: 0.8rem;
@@ -1307,6 +1344,7 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
     display: inline-block;
 }
+    */
 
 .nav-brand:hover {
     background: rgba(0, 122, 255, 0.1);
